@@ -16,7 +16,7 @@ CORS(app)
 !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 '''
-# db_drop_and_create_all()
+db_drop_and_create_all()
 
 ## ROUTES
 '''
@@ -27,7 +27,13 @@ CORS(app)
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
-
+@app.route('/drinks', methods=['GET'])
+def get_drinks(): 
+    drinks = Drink.query.all()
+    return jsonify({
+        'success': True, 
+        'drinks': [drink.short() for drink in drinks]
+    }), 200
 
 '''
 @TODO implement endpoint
@@ -37,7 +43,14 @@ CORS(app)
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
-
+@app.route('/drinks-detail', methods=['GET'])
+@requires_auth('get:drinks-detail')
+def get_drink_detail(payload): 
+    drinks = Drink.query.all()
+    return jsonify({
+        'success': True, 
+        'drinks': [drink.long() for drink in drinks]
+    }), 200
 
 '''
 @TODO implement endpoint
@@ -48,6 +61,26 @@ CORS(app)
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the newly created drink
         or appropriate status code indicating reason for failure
 '''
+
+@app.route('/drinks', methods=['POST'])
+@requires_auth('post:drinks')
+def post_drink(payload):
+    drink_request = request.get_json()
+    try:
+        recipe = drink_request['recipe']
+        if isinstance(recipe, dict): 
+           recipe = [recipe]
+        drink = Drink()
+        drink.title = drink_request['title']
+        drink.recipe = json.dumps(drink_request)
+        drink.insert()
+    except: 
+        abort(400)
+    return jsonify({
+        'success': True, 
+        'drinks': [drink.long()]
+    }), 200
+    
 
 
 '''
