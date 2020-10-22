@@ -10,39 +10,19 @@ from .auth.auth import AuthError, requires_auth
 app = Flask(__name__)
 setup_db(app)
 CORS(app)
-
-'''
-@TODO uncomment the following line to initialize the datbase
-!! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
-!! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
-'''
 db_drop_and_create_all()
 
 ## ROUTES
-'''
-@TODO implement endpoint
-    GET /drinks
-        it should be a public endpoint
-        it should contain only the drink.short() data representation
-    returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
-        or appropriate status code indicating reason for failure
-'''
+
 @app.route('/drinks', methods=['GET'])
 def get_drinks(): 
     drinks = Drink.query.all()
     return jsonify({
         'success': True, 
         'drinks': [drink.short() for drink in drinks]
-    }), 200
+    })
 
-'''
-@TODO implement endpoint
-    GET /drinks-detail
-        it should require the 'get:drinks-detail' permission
-        it should contain the drink.long() data representation
-    returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
-        or appropriate status code indicating reason for failure
-'''
+
 @app.route('/drinks-detail', methods=['GET'])
 @requires_auth('get:drinks-detail')
 def get_drink_detail(payload): 
@@ -50,7 +30,7 @@ def get_drink_detail(payload):
     return jsonify({
         'success': True, 
         'drinks': [drink.long() for drink in drinks]
-    }), 200
+    })
 
 '''
 @TODO implement endpoint
@@ -65,22 +45,18 @@ def get_drink_detail(payload):
 @app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
 def post_drink(payload):
-    drink_request = request.get_json()
-    try:
-        recipe = drink_request['recipe']
-        if isinstance(recipe, dict): 
-           recipe = [recipe]
-        drink = Drink()
-        drink.title = drink_request['title']
-        drink.recipe = json.dumps(drink_request)
-        drink.insert()
-    except: 
-        abort(400)
+    body = request.get_json()
+
+    new_drink = Drink(
+        title = body['title'], 
+        recipe = body['recipe']
+    )
+
+    new_drink.insert()
     return jsonify({
         'success': True, 
-        'drinks': [drink.long()]
-    }), 200
-    
+        'drinks': Drink.long(new_drink)
+    })
 
 
 '''
