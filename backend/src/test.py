@@ -42,7 +42,7 @@ class CoffeeTestCase(unittest.TestCase):
 
     def test_get_drinks_detail(self): 
         response = requests.get('https://coffeeshop-capstone-backend.herokuapp.com/drinks-detail', headers={
-            "Authorization":"Bearer{}".format(self.baristajwt)
+            "Authorization":"Bearer {}".format(self.baristajwt)
         })
         self.assertEqual(response.status_code, 200)
 
