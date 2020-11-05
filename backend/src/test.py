@@ -25,9 +25,26 @@ class CoffeeTestCase(unittest.TestCase):
     def tearDown(self): 
         pass 
 
+    #test get drinks success/failure 
+
     def test_get_drinks(self): 
         response = self.client().get('/drinks')
         self.assertEqual(response.status_code, 200)
+
+    #test get drinks-detail success/failure 
+
+
+    #test post drinks success/failure
+
+    
+    #test patch drinks/<id> success/failure
+
+
+    #test delete drinks/<id> success/failure
+
+
+    #test role based access scenarios 
+ 
 
     # def test_get_drinks_detail(self): 
     #     response = self.client().get('/drinks-detail')
