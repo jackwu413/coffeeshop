@@ -44,11 +44,11 @@ def add_drink(payload):
     body = request.get_json()
 
     try:
-        recipe = body['recipe']
+        recipe = body["recipe"]
         if isinstance(recipe, dict):
             recipe = [recipe]
         drink = Drink(
-            title=body['title'],
+            title=body["title"],
             recipe=json.dumps(recipe)
         )
         drink.insert()
@@ -71,12 +71,13 @@ def update_drink(payload, id):
         abort(400)
 
     try:
-        title = body.get('title')
-        recipe = body.get('recipe')
+        title = body.get("title")
+        recipe = body.get("recipe") if type(body.get("recipe")) == str else json.dumps(body.get("recipe"))
         if title:
             drink.title = title
         if recipe:
             drink.recipe = recipe
+        drink.update()
     except Exception as e:
         print(e)
         abort(400)
