@@ -66,21 +66,19 @@ def add_drink(payload):
 def update_drink(payload, id):
     body = request.get_json()
     drink = Drink.query.filter(Drink.id == id).one_or_none()
-
+    print(drink)
     if not drink:
         abort(400)
 
     try:
         title = body.get('title')
         recipe = body.get('recipe')
-
         if title:
             drink.title = title
-
         if recipe:
             drink.recipe = recipe
-
-    except BaseException:
+    except Exception as e:
+        print(e)
         abort(400)
 
     return jsonify({

@@ -3,6 +3,7 @@ import unittest
 import json 
 import requests
 import random
+from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy 
 from app import create_app
 from database.models import setup_db, Drink
@@ -10,8 +11,8 @@ from database.models import setup_db, Drink
 
 class CoffeeTestCase(unittest.TestCase): 
 
-    baristajwt = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMzMjYwZDQzMmMwMDZmY2Q5OWFjIiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0NjgwNjQzLCJleHAiOjE2MDQ2ODc4NDMsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.Qod-7kThKTRDG8WoaFrCmBsXO7YMVAmQscmvCzDP4nKrkzWVAQGlnhmaXSNnNJhPDMkb0VBFAHvqqBrZApj6Bm1BQZAycPrdkpYi5tki0RIKMqZJ0ibv_f8Q12yqdOvc4xBmmdC094uVUx76ONbqp5klQsDggAFbpMyDbfeoxsrIkgpcHZX3niLRjUDRcuFhEDSARtDvsRQ8co8twyNucE62TMTx0j8bJPcer1KxINtEItHsWjHoAUKdztILGgVIR-caB_o0eROkmFGo_UF7ggfSzEx04IB5wZweToJv5VcmidfP_fW27eTc91cuevunZakMybzQQkjPJizi6Xw2tQ'
-    managerjwt = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMyZmJiZjIyZWMwMDZiNDZmNzM5IiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0NjgwNjEzLCJleHAiOjE2MDQ2ODc4MTMsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcy1kZXRhaWwiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.GQGJwebAsyrIntNwcYB3rOfm8AMPU2mZHJuCCZPKKNIou90iiKSs6y9-iIuFmg6dvX8jPPWz89OgsBSL6dIpVPt5kvWjBCvRX4o0qGaqj3pg0m8QFtbFy6g87cZcHBzgQA3b7lXnqZtDRU-LZIICV8jyAazmr0njpW1cEXRj3AWjStMnP8itJNKNzBbc6qkxhUSEH09NYS-1Wcc4zASWzCmS370OgQ-k1ByJ84FMcs-wjbjLMXCvQZaAa2Bbk5toBlWJzxvM7HRmeiCXGeHp5F0VQm_qdbqvbYirxllm0fBKNtjgSFAADfpch8pKwt_tUR80h4mGgfSM7BWY0pIotw'
+    baristajwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMzMjYwZDQzMmMwMDZmY2Q5OWFjIiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0Njk3ODMwLCJleHAiOjE2MDQ3MDUwMzAsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.dav1JwnohWe0tLUwOx0FuPpbZzGDg8v-hw47IVb9n4QPz5jN8JqVRhQthDC2OHt0bj8w9yGFTHpSHdD74FkyU1kWCZirVUB9Zq2P0X90FZ8eZ-MT__2IGCMyTYJxQkIkgUOHACBmisU7_CTARS8CNO2g7hmL-zXKy-bIih-MS9GJo0boy5T1tmP5EAkU2YAKp7Z_mNUvjgaCxmQddIscBh9CsSdg5wd5BYnqfamfNFGOYFAKkOD6_jQ_kTqZDgJWV6kGjXkgDVdmOmAJcBpQTAKerFNN_hAjTtzhBKSk_l4B1QKPjv832uUAgF_1KZiTgKqut9Esbcb_MRgIIA2qmw"
+    managerjwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMyZmJiZjIyZWMwMDZiNDZmNzM5IiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0Njk3ODEzLCJleHAiOjE2MDQ3MDUwMTMsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcy1kZXRhaWwiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.DRBlzCAz6w1igBafLXYccgXAayRd0Giw3hNNG6S70LnpTFaBKUOuOn8XjUWMU4wl9lVoaMartfStF6cdTlfJj8vvyp6nUJqAqxsdJcrKQCM-ssWiINUBjBKsUZLHNtRCUSPY5bYpuluoBVGrvRy15G7oxasfqg_PLS61pBbU6vLMNt4X2oooG8r88dlaUD7OTHPC0R4qq-PdFmX0WyFnaB9N1090fsBRRw2Kc_q-pkuWA40_5BuBuVnxCtrXHSVHIvISFU1P19mPpZ0j5aCERcUPa1ezynxyQbfKCcawP36xqLAbEOu2K6x-_XvtW057WL_0zhwwes2a0X2G4fBUHg"
     sample_drink = {
         "title":"sample title",
         "recipe":[{
@@ -20,6 +21,7 @@ class CoffeeTestCase(unittest.TestCase):
             "parts": 1
         }]
     }
+
 
     def setUp(self): 
         self.app = create_app()
@@ -57,11 +59,16 @@ class CoffeeTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_post_drinks(self):
-        self.sample_drink['title'] += str(random.randint(10, 1000))
-        response = requests.post('https://coffeeshop-capstone-backend.herokuapp.com/drinks', json=self.sample_drink, headers={
+        # self.sample_drink['title'] += str(random.randint(10, 1000))       
+
+        response = requests.post('https://coffeeshop-capstone-backend.herokuapp.com/drinks', json={
+            "title": self.sample_drink['title'] + str(random.randint(10, 1000)),
+            "recipe": self.sample_drink['recipe']
+        }, headers={
             "Authorization":"Bearer {}".format(self.managerjwt)
         })
         self.assertEqual(response.status_code, 200)
+
 
     def test_post_drinks_failure(self):
         response = requests.post('https://coffeeshop-capstone-backend.herokuapp.com/drinks', json=self.sample_drink)
@@ -70,11 +77,34 @@ class CoffeeTestCase(unittest.TestCase):
     
 
     def test_patch_drinks(self): 
-        response = requests.patch('https://coffeeshop-capstone-backend.herokuapp.com/drinks/1', json=self.sample_drink, headers={
+        # response = requests.patch('https://coffeeshop-capstone-backend.herokuapp.com/drinks/1', json=self.sample_drink, headers={
+        #     "Authorization":"Bearer {}".format(self.managerjwt)
+        # })
+        # self.assertEqual(response.status_code, 200)
+        # add a new drink 
+        self.sample_drink["title"] += str(random.randint(10, 1000))
+        d = Drink(
+            title = self.sample_drink["title"],
+            recipe = str(self.sample_drink["recipe"])
+        )
+        d.insert()
+        #delete drink 
+        d_id = d.id 
+
+        patched_drink = {
+            "title":"patched drink",
+            "recipe":[{
+                "color": "black",
+                "name": "sample ingredient",
+                "parts": 1
+            }]
+        }
+
+        response = requests.patch('https://coffeeshop-capstone-backend.herokuapp.com/drinks/{}'.format(d_id), headers={
             "Authorization":"Bearer {}".format(self.managerjwt)
         })
-        print(response)
         self.assertEqual(response.status_code, 200)
+
 
     def test_patch_drinks_failure(self): 
         response = requests.patch('https://coffeeshop-capstone-backend.herokuapp.com/drinks/1')
