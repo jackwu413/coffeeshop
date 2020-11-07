@@ -11,8 +11,8 @@ from database.models import setup_db, Drink
 
 class CoffeeTestCase(unittest.TestCase): 
 
-    baristajwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMzMjYwZDQzMmMwMDZmY2Q5OWFjIiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0Njk3ODMwLCJleHAiOjE2MDQ3MDUwMzAsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.dav1JwnohWe0tLUwOx0FuPpbZzGDg8v-hw47IVb9n4QPz5jN8JqVRhQthDC2OHt0bj8w9yGFTHpSHdD74FkyU1kWCZirVUB9Zq2P0X90FZ8eZ-MT__2IGCMyTYJxQkIkgUOHACBmisU7_CTARS8CNO2g7hmL-zXKy-bIih-MS9GJo0boy5T1tmP5EAkU2YAKp7Z_mNUvjgaCxmQddIscBh9CsSdg5wd5BYnqfamfNFGOYFAKkOD6_jQ_kTqZDgJWV6kGjXkgDVdmOmAJcBpQTAKerFNN_hAjTtzhBKSk_l4B1QKPjv832uUAgF_1KZiTgKqut9Esbcb_MRgIIA2qmw"
-    managerjwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMyZmJiZjIyZWMwMDZiNDZmNzM5IiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0Njk3ODEzLCJleHAiOjE2MDQ3MDUwMTMsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcy1kZXRhaWwiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.DRBlzCAz6w1igBafLXYccgXAayRd0Giw3hNNG6S70LnpTFaBKUOuOn8XjUWMU4wl9lVoaMartfStF6cdTlfJj8vvyp6nUJqAqxsdJcrKQCM-ssWiINUBjBKsUZLHNtRCUSPY5bYpuluoBVGrvRy15G7oxasfqg_PLS61pBbU6vLMNt4X2oooG8r88dlaUD7OTHPC0R4qq-PdFmX0WyFnaB9N1090fsBRRw2Kc_q-pkuWA40_5BuBuVnxCtrXHSVHIvISFU1P19mPpZ0j5aCERcUPa1ezynxyQbfKCcawP36xqLAbEOu2K6x-_XvtW057WL_0zhwwes2a0X2G4fBUHg"
+    baristajwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMzMjYwZDQzMmMwMDZmY2Q5OWFjIiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0NzEzNTkzLCJleHAiOjE2MDQ3MjA3OTMsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.SHao9oG7gyLOY_Gz_li-whdMCMgUNNYkowV2XyCWCak4TkbA-3tuQ0A5m8OMzAJzV3Gpd5xsqtJ5dm5por61TOMtuaPQN5pAjm4tdOsx09KDbey6MPPoy9okgP1ofkWs4H5PvQyFAWw0tO_Qg07nkg6uUcE2LJ8lNTZRp5_T0O47trCdpfSNQgP5Hwtu8-mIRi_ifMXW81yeFAiaJLSsgjd35AbMbIwDI0GhrNHyB9Rs5UYAgwpt3zByEV4e2V4XIO4g95vnrbxHZnEhRgMSTNAmdN_bU_wUijKJfcKa3XZWAbz014Bs6-6fTfrQXJsPVOSuHLYdRpclpEfS5IQyvQ"
+    managerjwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5nZk04cHNmTUZSNkUtdThheFUwVyJ9.eyJpc3MiOiJodHRwczovL2phY2t3dS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZhMGMyZmJiZjIyZWMwMDZiNDZmNzM5IiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNjA0NzEzNTQ0LCJleHAiOjE2MDQ3MjA3NDQsImF6cCI6IlBIVE81YVhMYWVPWk9ZaERFeE9NZEx5Y0hrM3hpd0xIIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcy1kZXRhaWwiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.YVwlWpxHyvvEZucXw0_Yf9y-yhTy-bMB5kkVd2pMfHCa8rVl6TgqgYgEVMqKvXrtffsMnaEdLoZ-HG0h6Z8PHpnzvEcr18iueFUd33vjPKjbZuh57sXU8IrYTnJz0m6DBrRE9fGYe7iPsdr9ovGKEfwYF8aGxoy-3HIgiiRZIhJUFi1LZRATYdaYKG2lzYu9AE37aCWMku3rudaaW7aekefbB3ZXhaPLUV15uHjbBvvQs14Wr5Npf1vsx67d3bvz2toMWahslwT6OedvkqQDzXQ63G4SdIxqvWWNHSUxV7Ddo7a22Xa84wo7PD-aF2kXl3VZjdvNlJx6J4NUKWKfOQ"
     sample_drink = {
         "title":"sample title",
         "recipe":[{
@@ -82,10 +82,10 @@ class CoffeeTestCase(unittest.TestCase):
         # })
         # self.assertEqual(response.status_code, 200)
         # add a new drink 
-        self.sample_drink["title"] += str(random.randint(10, 1000))
+        # self.sample_drink["title"] += str(random.randint(10, 1000))
         d = Drink(
-            title = self.sample_drink["title"],
-            recipe = str(self.sample_drink["recipe"])
+            title = self.sample_drink["title"] + str(random.randint(10, 1000)),
+            recipe = json.dumps(self.sample_drink["recipe"])
         )
         d.insert()
         #delete drink 
@@ -100,7 +100,7 @@ class CoffeeTestCase(unittest.TestCase):
             }]
         }
 
-        response = requests.patch('https://coffeeshop-capstone-backend.herokuapp.com/drinks/{}'.format(d_id), headers={
+        response = requests.patch('https://coffeeshop-capstone-backend.herokuapp.com/drinks/{}'.format(d_id), json=patched_drink,headers={
             "Authorization":"Bearer {}".format(self.managerjwt)
         })
         self.assertEqual(response.status_code, 200)

@@ -41,10 +41,7 @@ class Drink(db.Model):
     # 'parts':number}]
     recipe = Column(String(180), nullable=False)
 
-    '''
-    short()
-        short form representation of the Drink model
-    '''
+    
 
     def short(self):
         print(json.loads(self.recipe))
@@ -56,10 +53,6 @@ class Drink(db.Model):
             'recipe': short_recipe
         }
 
-    '''
-    long()
-        long form representation of the Drink model
-    '''
 
     def long(self):
         return {
@@ -68,28 +61,13 @@ class Drink(db.Model):
             'recipe': json.loads(self.recipe)
         }
 
-    '''
-    insert()
-        inserts a new model into a database
-        the model must have a unique name
-        the model must have a unique id or null id
-        EXAMPLE
-            drink = Drink(title=req_title, recipe=req_recipe)
-            drink.insert()
-    '''
+
 
     def insert(self):
         db.session.add(self)
         db.session.commit()
 
-    '''
-    delete()
-        deletes a new model into a database
-        the model must exist in the database
-        EXAMPLE
-            drink = Drink(title=req_title, recipe=req_recipe)
-            drink.delete()
-    '''
+   
 
     def delete(self):
         db.session.delete(self)
